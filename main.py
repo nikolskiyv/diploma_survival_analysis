@@ -1,19 +1,9 @@
-from data_preparation.main import prepare_df, get_xy
+from data_preparation.main import prepare_df  # data_path -> x, y
+
 from models.gradient_boost.main import GradientBoostingModel
 from models.ssvm.main import SSVMModel
 
-
-def best_score(x, y):
-    ssvm_score = 0
-    #ssvm = SSVMModel(x, y)
-    #ssvm_score = ssvm.get_score()
-
-    gb_score = 0
-    gb = GradientBoostingModel(x, y)
-    gb_score = gb.get_score()
-
-    return max(ssvm_score, gb_score)
-
+from models.best_model import model_cmp  # comparison 2+ S-A models
 
 if __name__ == '__main__':
 
@@ -21,12 +11,12 @@ if __name__ == '__main__':
     data_path = input('Начало работы. Введите путь до файла(.csv) с данными: ')
 
     # 2. Подготовка данных
-    data_frame = prepare_df(data_path)
-    x, y = get_xy(data_frame)
+    x, y = prepare_df(data_path)
 
-    # 3. Определяем модель(с параметрами), которая дает лучший score
+    # 3. Определяем объекты моделей и получаем оценки
+
+
     print('В работе...')
-    best_model_score = best_score(x, y)
 
-    print(f'Лучший C-index: {best_model_score}')
+    # ToDo: метод для предложения лучшей модели под конкретный набор данных
 
